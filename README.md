@@ -1,1 +1,1 @@
-# odin-rock-paper-scissors
+Simple jack en poy game.
