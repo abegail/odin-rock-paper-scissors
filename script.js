@@ -1,4 +1,4 @@
-// Create a function that will randomly return either "Rock", "Paper", or Scissors
+// Generate the computer's choice
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3);
     switch (randomNumber) {
@@ -11,7 +11,7 @@ function getComputerChoice() {
     }
 }
 
-// Create a function that will play one single round
+// Play one single round
 function playRound(playerSelection, computerSelection) {
     let whatPlayerSelected = playerSelection.toLowerCase();
 
@@ -45,23 +45,34 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-// Create a function that will play a 5-round game and keep score for each game
+// Play a 5-round game and keep score for each round
 function game() {
     let playerSelection;
     let computerSelection;
     let result;
+    let playerScore = 0;
+    let computerScore = 0;
 
     for (let i = 0; i < 5; i++) {
         playerSelection = prompt("Enter your choice:");
         computerSelection = getComputerChoice();
         result = playRound(playerSelection, computerSelection);
 
+        // Increment score of winner
+        if (result.includes("win")) playerScore += 1;
+        else if (result.includes("lose")) computerScore += 1;
+
         console.log(`Player selection is: ${playerSelection}`);
         console.log(`Computer selection is: ${computerSelection}`);
         console.log(result);
-        alert(`\nYou selected: ${playerSelection} \nComputer selected: ${computerSelection} \n\n${result}`);
+        alert(`\nYou selected: ${playerSelection} \nComputer selected: ${computerSelection} \n\n${result}\n\nYour score: ${playerScore}\nComputer score: ${computerScore}`);
         
     }
+
+    // Display final game winner
+    if (playerScore === computerScore) alert("It's a draw.");
+    else if (playerScore > computerScore) alert("You're awesome!");
+    else alert("You suck.");
 }
 
 game();
