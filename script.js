@@ -18,7 +18,8 @@ function playRound(playerSelection, computerSelection) {
     if (whatPlayerSelected === computerSelection) {
         return "It's a draw!";
     }
-
+    
+    // I wonder if there's a shorter implementation of the code below. Some parts feel redundant.
     if (whatPlayerSelected === "rock") {
         if (computerSelection === "paper") {
             return "You lose! Paper beats rock.";
@@ -39,16 +40,28 @@ function playRound(playerSelection, computerSelection) {
         if (computerSelection === "rock") {
             return "You lose! Rock beats scissors";
         } else {
-            return "You win! Paper beats rock."
+            return "You win! Scissors beat paper."
         }
     }
-    
-  
 }
 
-const playerSelection = "PAPER";
-const computerSelection = getComputerChoice();
+// Create a function that will play a 5-round game and keep score for each game
+function game() {
+    let playerSelection;
+    let computerSelection;
+    let result;
 
-console.log(`Player selection is: ${playerSelection}`);
-console.log(`Computer selection is: ${computerSelection}`);
-console.log(playRound(playerSelection, computerSelection));
+    for (let i = 0; i < 5; i++) {
+        playerSelection = prompt("Enter your choice:");
+        computerSelection = getComputerChoice();
+        result = playRound(playerSelection, computerSelection);
+
+        console.log(`Player selection is: ${playerSelection}`);
+        console.log(`Computer selection is: ${computerSelection}`);
+        console.log(result);
+        alert(`\nYou selected: ${playerSelection} \nComputer selected: ${computerSelection} \n\n${result}`);
+        
+    }
+}
+
+game();
