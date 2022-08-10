@@ -1,3 +1,109 @@
+const body = document.querySelector('body');
+const message = document.querySelector('#message');
+const weaponChoice = document.querySelector('#weaponChoice');
+const choiceContainer = document.querySelector('#choiceContainer');
+const score = document.querySelector('#score');
+const humanChoice = document.createElement('p');
+const computerChoice = document.createElement('p');
+const humanScore = document.createElement('p');
+const computerScore = document.createElement('p');
+
+const rock = document.createElement('button');
+rock.textContent = "Rock";
+const paper = document.createElement('button');
+paper.textContent = "Paper";
+const scissors = document.createElement('button');
+scissors.textContent = "Scissors";
+
+let humanScoreNumber = 0;
+let computerScoreNumber = 0;
+
+const startButton = document.querySelector('#newGame');
+startButton.addEventListener('click', startGame);
+
+function startGame() {
+    console.log('At start of game');
+    console.log(humanScoreNumber);
+    console.log(computerScoreNumber);
+    // Transition to game page
+    message.textContent = "Pick your weapon:"
+    body.removeChild(startButton);
+
+    //Create choice summary
+    humanChoice.textContent = 'Your choice: ';
+    computerChoice.textContent = 'Computer\'s choice: ';
+    weaponChoice.appendChild(humanChoice);
+    weaponChoice.appendChild(computerChoice);
+
+    //Create score tally
+    humanScore.textContent = 'Your score: ';
+    computerScore.textContent = 'Computer score: ';
+    score.appendChild(humanScore);
+    score.appendChild(computerScore);
+
+    // Create weapon buttons
+    choiceContainer.appendChild(rock);
+    choiceContainer.appendChild(paper);
+    choiceContainer.appendChild(scissors);
+
+    // Translate button clicks
+    rock.addEventListener('click', () => {
+        playRound('rock');
+    });
+
+    paper.addEventListener('click', () => {
+        playRound('paper');
+    });
+
+    scissors.addEventListener('click', () => {
+        playRound('scissors');
+    });
+}
+
+function playRound(playerSelection) {
+    computerSelection = getComputerChoice();
+    let result = message.textContent = compareWeapons(playerSelection, computerSelection);
+    humanChoice.textContent = `Your choice: ${playerSelection}`;
+    computerChoice.textContent = `Computer\'s choice: ${computerSelection}`;
+
+    // Increment and update scores
+    if (result.includes("win")) humanScoreNumber += 1;
+    else if (result.includes("lose")) computerScoreNumber += 1;
+    humanScore.textContent = `Your score: ${humanScoreNumber}`;
+    computerScore.textContent = `Computer score: ${computerScoreNumber}`;
+
+    console.log('Inside playRound');
+    console.log(humanScoreNumber);
+    console.log(computerScoreNumber);
+
+    checkEndGame();
+}
+
+function checkEndGame() {
+    let gameOver = false;
+    if (humanScoreNumber === 5) {
+        message.textContent = "You win the game!";
+        gameOver = true;
+    } else if (computerScoreNumber === 5) {
+        message.textContent = "Computer wins. You lose the game."
+        gameOver = true;
+    }
+
+    if (gameOver) {
+        weaponChoice.removeChild(humanChoice);
+        weaponChoice.removeChild(computerChoice);
+        choiceContainer.removeChild(rock);
+        choiceContainer.removeChild(paper);
+        choiceContainer.removeChild(scissors);
+        startButton.textContent = 'New Game';
+        body.appendChild(startButton);
+        humanScoreNumber = 0;
+        computerScoreNumber = 0;
+        console.log(humanScoreNumber);
+        console.log(computerScoreNumber);
+    }
+}
+
 // Generate the computer's choice
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3);
@@ -12,7 +118,7 @@ function getComputerChoice() {
 }
 
 // Play one single round
-function playRound(playerSelection, computerSelection) {
+function compareWeapons(playerSelection, computerSelection) {
     let whatPlayerSelected = playerSelection.toLowerCase();
 
     if (whatPlayerSelected === computerSelection) {
@@ -44,35 +150,3 @@ function playRound(playerSelection, computerSelection) {
         }
     }
 }
-
-// Play a 5-round game and keep score for each round
-function game() {
-    let playerSelection;
-    let computerSelection;
-    let result;
-    let playerScore = 0;
-    let computerScore = 0;
-
-    for (let i = 0; i < 5; i++) {
-        playerSelection = prompt("Enter your choice:");
-        computerSelection = getComputerChoice();
-        result = playRound(playerSelection, computerSelection);
-
-        // Increment score of winner
-        if (result.includes("win")) playerScore += 1;
-        else if (result.includes("lose")) computerScore += 1;
-
-        console.log(`Player selection is: ${playerSelection}`);
-        console.log(`Computer selection is: ${computerSelection}`);
-        console.log(result);
-        alert(`\nYou selected: ${playerSelection} \nComputer selected: ${computerSelection} \n\n${result}\n\nYour score: ${playerScore}\nComputer score: ${computerScore}`);
-        
-    }
-
-    // Display final game winner
-    if (playerScore === computerScore) alert("It's a draw.");
-    else if (playerScore > computerScore) alert("You're awesome!");
-    else alert("You suck.");
-}
-
-game();
