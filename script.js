@@ -15,6 +15,19 @@ paper.textContent = "Paper";
 const scissors = document.createElement('button');
 scissors.textContent = "Scissors";
 
+// Translate button clicks
+rock.addEventListener('click', () => {
+    playRound('rock');
+});
+
+paper.addEventListener('click', () => {
+    playRound('paper');
+});
+
+scissors.addEventListener('click', () => {
+    playRound('scissors');
+});
+
 let humanScoreNumber = 0;
 let computerScoreNumber = 0;
 
@@ -22,9 +35,6 @@ const startButton = document.querySelector('#newGame');
 startButton.addEventListener('click', startGame);
 
 function startGame() {
-    console.log('At start of game');
-    console.log(humanScoreNumber);
-    console.log(computerScoreNumber);
     // Transition to game page
     message.textContent = "Pick your weapon:"
     body.removeChild(startButton);
@@ -45,19 +55,6 @@ function startGame() {
     choiceContainer.appendChild(rock);
     choiceContainer.appendChild(paper);
     choiceContainer.appendChild(scissors);
-
-    // Translate button clicks
-    rock.addEventListener('click', () => {
-        playRound('rock');
-    });
-
-    paper.addEventListener('click', () => {
-        playRound('paper');
-    });
-
-    scissors.addEventListener('click', () => {
-        playRound('scissors');
-    });
 }
 
 function playRound(playerSelection) {
@@ -71,10 +68,6 @@ function playRound(playerSelection) {
     else if (result.includes("lose")) computerScoreNumber += 1;
     humanScore.textContent = `Your score: ${humanScoreNumber}`;
     computerScore.textContent = `Computer score: ${computerScoreNumber}`;
-
-    console.log('Inside playRound');
-    console.log(humanScoreNumber);
-    console.log(computerScoreNumber);
 
     checkEndGame();
 }
@@ -99,8 +92,6 @@ function checkEndGame() {
         body.appendChild(startButton);
         humanScoreNumber = 0;
         computerScoreNumber = 0;
-        console.log(humanScoreNumber);
-        console.log(computerScoreNumber);
     }
 }
 
