@@ -3,6 +3,8 @@ const body = document.querySelector('body');
 const message = document.querySelector('#message');
 const weaponsContainer = document.querySelector('#weaponsContainer');
 const statsContainer = document.querySelector('#statsContainer');
+const footer = document.querySelector('footer');
+const gameContent = document.querySelector('#gameContent');
 
 // Game stats (score, weapon selection)
 const humanStats = document.querySelector('#humanStats');
@@ -16,11 +18,11 @@ const computerPlayerSelection = document.querySelector('#computerStats>.selectio
 
 // Create weapon selection
 const rock = document.createElement('button');
-rock.textContent = "Rock";
+rock.classList.add('rock');
 const paper = document.createElement('button');
-paper.textContent = "Paper";
+paper.classList.add('paper');
 const scissors = document.createElement('button');
-scissors.textContent = "Scissors";
+scissors.classList.add('scissors');
 
 // Translate button clicks
 const startButton = document.querySelector('#newGame');
@@ -51,13 +53,13 @@ function startGame() {
     weaponsContainer.appendChild(scissors);
 
     // Show stats
-    humanPlayer.textContent = 'You';
-    computerPlayer.textContent = 'Computer';
+    humanPlayer.textContent = 'YOU';
+    computerPlayer.textContent = 'COMPUTER';
 
     humanPlayerScore.textContent = humanScoreNumber;
     computerPlayerScore.textContent = computerScoreNumber;
 
-    body.removeChild(startButton);
+    gameContent.removeChild(startButton);
 }
 
 function playRound(playerSelection) {
@@ -90,9 +92,10 @@ function checkEndGame() {
         weaponsContainer.removeChild(paper);
         weaponsContainer.removeChild(scissors);
         startButton.textContent = 'New Game';
-        body.appendChild(startButton);
+        gameContent.append(startButton);
         humanScoreNumber = 0;
         computerScoreNumber = 0;
+        startButton.classList.remove('newGameInitial');
     }
 }
 

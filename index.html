@@ -7,24 +7,24 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>Rock Paper Scissors</h1>
-    <h2 id="message">Human vs. Computer</h2>
-    <div id="weaponsContainer"></div>
-    <div id="statsContainer">
-        <div id="humanStats">
-            <div class="player"></div>
-            <div class="score"></div>
-            <div class="selection"></div>
+    <header><h1>Rock Paper Scissors</h1></header>
+    <div id="gameContent">
+        <h2 id="message">Can you beat the computer?</h2>
+        <div id="weaponsContainer"></div>
+        <div id="statsContainer">
+            <div id="humanStats">
+                <div class="player"></div>
+                <div class="score"></div>
+                <div class="selection"></div>
+            </div>
+            <div id="computerStats">
+                <div class="player"></div>
+                <div class="score"></div>
+                <div class="selection"></div>
+            </div>
         </div>
-        <div id="computerStats">
-            <div class="player"></div>
-            <div class="score"></div>
-            <div class="selection"></div>
-        </div>
+        <button id="newGame" class="newGameInitial">Start Game</button>
     </div>
-    <div id="weaponChoice"></div>
-    <div id="score"></div>
-    <button id="newGame">Start Game</button>
-    
+    <footer>Github</footer>
 </body>
 </html>

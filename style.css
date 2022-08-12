@@ -1,10 +1,120 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+header {
+    background-color: #4F6A7B;
+    width: 100%;
+    text-align: center;
+    flex: none;
+    padding: 28px 0;
+}
+
+#gameContent {
+    width: 100%;
+    flex: 1;
+    background-color: #151717;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 42px;
+    color: white;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+.newGameInitial {
+    margin-top: -80px;
+}
+
+#newGame {
+    width: 200px;
+    height: 60px;
+    color: #E5E9E9;
+    border: 5px solid white;
+    border-radius: 26px;
+    background-color: #4A6064;
+    font-size: 20px;
+}
+
+#message,
+.player,
+.score,
+.selection {
+    color: #8E8F8F;
+}
+
+#message {
+    color: white;
+    padding-top: 70px;
+}
+
+#weaponsContainer {
+    display: flex;
+    gap: 24px;
+    padding: 50px 0;
+}
+
+#weaponsContainer button {
+    background-size: cover;
+    background-position: center;
+    width: 150px;
+    height: 150px;
+    border: 2px solid #2B3132;
+    border-radius: 24px;
+}
+
+.rock {
+    background-image: url(images/rock.png);
+}
+
+.paper {
+    background-image: url(images/paper.png);
+}
+
+.scissors {
+    background-image: url(images/scissors.png);
+}
+
+#statsContainer {
+    display: flex;
+    gap: 100px;
+    padding-bottom: 100px;
+}
+
+#humanStats,
+#computerStats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score {
+    font-size: 36px;
+    font-weight: bold;
+    padding: 15px 0;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    flex: none;
+    background-color: #2B3132;
+    color: #676B6C;
+    padding: 20px 0;
 }
