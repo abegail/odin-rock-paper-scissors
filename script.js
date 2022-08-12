@@ -1,13 +1,20 @@
+// Map html elements
 const body = document.querySelector('body');
 const message = document.querySelector('#message');
-const weaponChoice = document.querySelector('#weaponChoice');
-const choiceContainer = document.querySelector('#choiceContainer');
-const score = document.querySelector('#score');
-const humanChoice = document.createElement('p');
-const computerChoice = document.createElement('p');
-const humanScore = document.createElement('p');
-const computerScore = document.createElement('p');
+const weaponsContainer = document.querySelector('#weaponsContainer');
+const statsContainer = document.querySelector('#statsContainer');
 
+// Game stats (score, weapon selection)
+const humanStats = document.querySelector('#humanStats');
+const computerStats = document.querySelector('#computerStats');
+const humanPlayer = document.querySelector('#humanStats>.player');
+const humanPlayerScore = document.querySelector('#humanStats>.score');
+const humanPlayerSelection = document.querySelector('#humanStats>.selection');
+const computerPlayer = document.querySelector('#computerStats>.player');
+const computerPlayerScore = document.querySelector('#computerStats>.score');
+const computerPlayerSelection = document.querySelector('#computerStats>.selection');
+
+// Create weapon selection
 const rock = document.createElement('button');
 rock.textContent = "Rock";
 const paper = document.createElement('button');
@@ -16,6 +23,9 @@ const scissors = document.createElement('button');
 scissors.textContent = "Scissors";
 
 // Translate button clicks
+const startButton = document.querySelector('#newGame');
+startButton.addEventListener('click', startGame);
+
 rock.addEventListener('click', () => {
     playRound('rock');
 });
@@ -31,43 +41,36 @@ scissors.addEventListener('click', () => {
 let humanScoreNumber = 0;
 let computerScoreNumber = 0;
 
-const startButton = document.querySelector('#newGame');
-startButton.addEventListener('click', startGame);
-
 function startGame() {
     // Transition to game page
     message.textContent = "Pick your weapon:"
-    body.removeChild(startButton);
-
-    //Create choice summary
-    humanChoice.textContent = 'Your choice: ';
-    computerChoice.textContent = 'Computer\'s choice: ';
-    weaponChoice.appendChild(humanChoice);
-    weaponChoice.appendChild(computerChoice);
-
-    //Create score tally
-    humanScore.textContent = 'Your score: ';
-    computerScore.textContent = 'Computer score: ';
-    score.appendChild(humanScore);
-    score.appendChild(computerScore);
 
     // Create weapon buttons
-    choiceContainer.appendChild(rock);
-    choiceContainer.appendChild(paper);
-    choiceContainer.appendChild(scissors);
+    weaponsContainer.appendChild(rock);
+    weaponsContainer.appendChild(paper);
+    weaponsContainer.appendChild(scissors);
+
+    // Show stats
+    humanPlayer.textContent = 'You';
+    computerPlayer.textContent = 'Computer';
+
+    humanPlayerScore.textContent = humanScoreNumber;
+    computerPlayerScore.textContent = computerScoreNumber;
+
+    body.removeChild(startButton);
 }
 
 function playRound(playerSelection) {
     computerSelection = getComputerChoice();
     let result = message.textContent = compareWeapons(playerSelection, computerSelection);
-    humanChoice.textContent = `Your choice: ${playerSelection}`;
-    computerChoice.textContent = `Computer\'s choice: ${computerSelection}`;
+    humanPlayerSelection.textContent = playerSelection;
+    computerPlayerSelection.textContent = computerSelection;
 
     // Increment and update scores
     if (result.includes("win")) humanScoreNumber += 1;
     else if (result.includes("lose")) computerScoreNumber += 1;
-    humanScore.textContent = `Your score: ${humanScoreNumber}`;
-    computerScore.textContent = `Computer score: ${computerScoreNumber}`;
+    humanPlayerScore.textContent = humanScoreNumber;
+    computerPlayerScore.textContent = computerScoreNumber;
 
     checkEndGame();
 }
@@ -83,11 +86,9 @@ function checkEndGame() {
     }
 
     if (gameOver) {
-        weaponChoice.removeChild(humanChoice);
-        weaponChoice.removeChild(computerChoice);
-        choiceContainer.removeChild(rock);
-        choiceContainer.removeChild(paper);
-        choiceContainer.removeChild(scissors);
+        weaponsContainer.removeChild(rock);
+        weaponsContainer.removeChild(paper);
+        weaponsContainer.removeChild(scissors);
         startButton.textContent = 'New Game';
         body.appendChild(startButton);
         humanScoreNumber = 0;
