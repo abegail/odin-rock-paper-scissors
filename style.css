@@ -115,6 +115,10 @@ footer {
     text-align: center;
     flex: none;
     background-color: #2B3132;
-    color: #676B6C;
     padding: 20px 0;
+}
+
+a {
+    text-decoration: none;
+    color: #676B6C;
 }

@@ -1,1 +1,1 @@
-Simple jack en poy game.
+Simple rock-paper-scissors game.
