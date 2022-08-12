@@ -38,8 +38,12 @@ h2 {
     font-size: 28px;
 }
 
+.initialMessage {
+    margin-top: 120px;
+}
+
 .newGameInitial {
-    margin-top: -80px;
+    margin-top: -180px;
 }
 
 #newGame {

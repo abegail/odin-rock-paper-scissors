@@ -60,6 +60,7 @@ function startGame() {
     computerPlayerScore.textContent = computerScoreNumber;
 
     gameContent.removeChild(startButton);
+    message.classList.remove('initialMessage');
 }
 
 function playRound(playerSelection) {
